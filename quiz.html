@@ -120,40 +120,41 @@
   </div>
 
   <script>
-    function gradeQuiz() {
-      const answers = {
-        q1: 'b',
-        q2: 'a',
-        q3: 'b',
-        q4: 'c',
-        q5: 'b',
-        q6: 'b',
-        q7: 'c',
-        q8: 'b',
-        q9: 'b',
-        q10: 'b'
-      };
-      let score = 0;
-      for (let key in answers) {
-        const selected = document.querySelector(`input[name="${key}"]:checked`);
-        if (selected && selected.value === answers[key]) {
-          score++;
-        }
-      }
-      const percent = (score / Object.keys(answers).length) * 100;
-      const resultDiv = document.getElementById("result");
-      if (percent >= 80) {
-        resultDiv.innerHTML = `✅ You passed with a score of ${percent}%. Click <a href='certificate.html'>here</a> to claim your certificate.`;
-      } else {
-        resultDiv.innerHTML = `❌ You scored ${percent}%. You need at least 80% to pass. <br><br><button onclick='retryQuiz()'>Retry Quiz</button>`;
-      }
-    }
+  /* — NEW — capture params once */
+  const p     = new URLSearchParams(window.location.search);
+  const name  = p.get('name')  || '';
+  const email = p.get('email') || '';
 
-    function retryQuiz() {
-      document.getElementById("quizForm").reset();
-      document.getElementById("result").innerHTML = "";
-      window.scrollTo(0, 0);
+  function gradeQuiz() {
+    const answers = { q1:'b', q2:'a', q3:'b', q4:'c', q5:'b',
+                      q6:'b', q7:'c', q8:'b', q9:'b', q10:'b' };
+    let score = 0;
+    for (const key in answers) {
+      const sel = document.querySelector(`input[name="${key}"]:checked`);
+      if (sel && sel.value === answers[key]) score++;
     }
-  </script>
+    const percent = (score / 10) * 100;
+    const resultDiv = document.getElementById('result');
+
+    if (percent >= 80) {
+      /* success message now includes ?name=… */
+      resultDiv.innerHTML =
+        `✅ You passed with a score of ${percent}%. Click ` +
+        `<a href="certificate.html?name=${encodeURIComponent(name)}">here</a> ` +
+        `to claim your certificate.`;
+    } else {
+      resultDiv.innerHTML =
+        `❌ You scored ${percent}%. You need at least 80% to pass.<br><br>` +
+        `<button onclick="retryQuiz()">Retry Quiz</button>`;
+    }
+  }
+
+  function retryQuiz() {
+    document.getElementById('quizForm').reset();
+    document.getElementById('result').innerHTML = '';
+    window.scrollTo(0,0);
+  }
+</script>
+
 </body>
 </html>
