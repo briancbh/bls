@@ -19,13 +19,43 @@
 <body>
   <div class="container">
     <div id="slides">
-      <!-- 5 slides (same content) -->
-      <div class="slide"><h2>Welcome to BLS for Healthcare Providers</h2><p>This training will prepare you to perform high-quality CPR, use an AED, and respond to choking in adults, children, and infants. It is based on the 2020 AHA Guidelines and meets OSHA requirements.</p><img src="https://www.cdc.gov/cpr/images/banner-cpr.jpg" alt="CPR Training Banner"></div>
-      <div class="slide"><h2>What is BLS?</h2><p>Basic Life Support (BLS) refers to the level of medical care used for victims of life-threatening illnesses or injuries until they can be given full medical care. BLS includes CPR (cardiopulmonary resuscitation), AED (automated external defibrillator) use, and airway management.</p><img src="https://www.redcross.org/content/dam/redcross/training-landing/cpr-training-image.jpg" alt="BLS Components"></div>
-      <div class="slide"><h2>Who Needs BLS Training?</h2><p>This course is designed for healthcare providers such as nurses, physicians, EMTs, and other clinical staff who may need to perform CPR or assist in emergencies.</p><img src="https://www.cdc.gov/cpr/images/responders.jpg" alt="Healthcare Providers"></div>
-      <div class="slide"><h2>The Chain of Survival</h2><p>The AHA Chain of Survival includes:</p><ul><li>1. Early recognition and activation of emergency response</li><li>2. Immediate high-quality CPR</li><li>3. Rapid defibrillation</li><li>4. Effective advanced life support</li><li>5. Integrated post‑cardiac arrest care</li></ul><p>For more details, visit the <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines" target="_blank">official AHA CPR&nbsp;&amp;&nbsp;ECC Guidelines</a>.</p><img src="https://www.sca-aware.org/sites/default/files/images/chain-of-survival.png" alt="AHA Chain of Survival"></div>
-      <div class="slide"><h2>Let’s Get Started</h2><p>In the next module, we’ll dive into high-quality CPR, including techniques for adults, children, and infants. Click below to continue.</p><img src="https://media.istockphoto.com/id/1368481906/vector/first-aid-and-emergency-response-icon.jpg?s=612x612&w=0&k=20&c=KeQwQXYeED0xyx2AJacYjHj57Cnb-5GApAwUjR25Em0=" alt="CPR icon"></div>
+      <div class="slide">
+        <h2>Welcome to BLS for Healthcare Providers</h2>
+        <p>This training will prepare you to perform high-quality CPR, use an AED, and respond to choking in adults, children, and infants. It is based on the 2020 AHA Guidelines and meets OSHA requirements.</p>
+        <img src="img/module1_slide1.jpg" alt="CPR Training Session">
+      </div>
+
+      <div class="slide">
+        <h2>What is BLS?</h2>
+        <p>Basic Life Support (BLS) refers to the level of medical care used for victims of life-threatening illnesses or injuries until they can be given full medical care. BLS includes CPR (cardiopulmonary resuscitation), AED (automated external defibrillator) use, and airway management.</p>
+        <img src="img/module1_slide2.jpg" alt="First Aid Kit">
+      </div>
+
+      <div class="slide">
+        <h2>Who Needs BLS Training?</h2>
+        <p>This course is designed for healthcare providers such as nurses, physicians, EMTs, and other clinical staff who may need to perform CPR or assist in emergencies.</p>
+        <img src="img/module1_slide3.jpg" alt="Healthcare Providers">
+      </div>
+
+      <div class="slide">
+        <h2>The Chain of Survival</h2>
+        <p>The AHA Chain of Survival includes:</p>
+        <ul>
+          <li>1. Early recognition and activation of emergency response</li>
+          <li>2. Immediate high-quality CPR</li>
+          <li>3. Rapid defibrillation</li>
+          <li>4. Effective advanced life support</li>
+          <li>5. Integrated post‑cardiac arrest care</li>
+        </ul>
+        <p>For more details, visit the <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines" target="_blank">official AHA CPR&nbsp;&amp;&nbsp;ECC Guidelines</a>.</p>
+      </div>
+
+      <div class="slide">
+        <h2>Let’s Get Started</h2>
+        <p>In the next module, we’ll dive into high-quality CPR, including techniques for adults, children, and infants. Click below to continue.</p>
+      </div>
     </div>
+
     <div class="nav-buttons">
       <button id="prev" onclick="prevSlide()" disabled>Previous</button>
       <button id="next" onclick="nextSlide()">Next</button>
@@ -33,7 +63,6 @@
   </div>
 
 <script>
-  /* capture learner params */
   const params = new URLSearchParams(window.location.search);
   const name  = params.get('name')  || '';
   const email = params.get('email') || '';
@@ -46,7 +75,6 @@
   function showSlide(i){
     slides.forEach((s,idx)=>{s.style.display = idx===i?'block':'none';});
     prevBtn.disabled = i===0;
-    /* keep NEXT enabled on last slide, change text */
     if(i === slides.length-1){
       nextBtn.textContent = 'Continue';
       nextBtn.disabled = false;
@@ -60,7 +88,6 @@
     if(currentSlide < slides.length-1){
       currentSlide++; showSlide(currentSlide);
     } else {
-      /* last slide → redirect */
       const url = `module2.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
       location.href = url;
     }
