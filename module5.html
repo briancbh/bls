@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 5: Team-Based BLS</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e8f1f9;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .slide {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .slide h2 {
+      color: #0077cc;
+    }
+    .slide img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    button {
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: #005fa3;
+    }
+    button:disabled {
+      background-color: #bbb;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="slides">
+      <div class="slide">
+        <h2>Why Team-Based BLS Matters</h2>
+        <p>In a clinical or high-stakes setting, having multiple responders work together increases the effectiveness and efficiency of life-saving efforts. Clear roles and communication are key.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/CPR_training_team.jpg/640px-CPR_training_team.jpg" alt="Team CPR">
+      </div>
+      <div class="slide">
+        <h2>Common Roles in a BLS Team</h2>
+        <ul>
+          <li><strong>Compressor:</strong> Delivers chest compressions.</li>
+          <li><strong>Airway Manager:</strong> Provides rescue breaths or uses a bag-mask device.</li>
+          <li><strong>AED Operator:</strong> Retrieves and applies the AED and operates it.</li>
+          <li><strong>Team Leader:</strong> Oversees the situation, assigns roles, and ensures effective coordination.</li>
+        </ul>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/AED_CPR_Teamwork.jpg/640px-AED_CPR_Teamwork.jpg" alt="CPR Team Roles">
+      </div>
+      <div class="slide">
+        <h2>Communication is Critical</h2>
+        <p>Use clear, direct communication. Confirm instructions and announce actions (“Administering shock now!”). Rotate compressors every 2 minutes to avoid fatigue.</p>
+        <p>Use closed-loop communication: someone gives a direction, the receiver repeats it back, and confirms when it's done.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Resuscitation_team_training.jpg/640px-Resuscitation_team_training.jpg" alt="Team Communication">
+      </div>
+      <div class="slide">
+        <h2>Coordinated Practice</h2>
+        <p>Frequent team training helps improve timing, hand-offs, and decision-making. In high-performing teams, each person knows their role, when to rotate, and how to adapt if conditions change.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Team_training_resuscitation.jpg/640px-Team_training_resuscitation.jpg" alt="Team Practice">
+      </div>
+      <div class="slide">
+        <h2>You’re Almost Done!</h2>
+        <p>In the final section, you’ll take a short quiz to test your understanding. Score 80% or higher to receive your certificate of completion.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/First_aid_training_certification.jpg/640px-First_aid_training_certification.jpg" alt="Certification Prep">
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button id="prev" onclick="prevSlide()" disabled>Previous</button>
+      <button id="next" onclick="nextSlide()">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.display = i === index ? 'block' : 'none';
+      });
+      document.getElementById('prev').disabled = index === 0;
+      document.getElementById('next').disabled = index === slides.length - 1;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    showSlide(currentSlide);
+  </script>
+</body>
+</html>

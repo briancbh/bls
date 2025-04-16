@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 3: AED Use</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e8f1f9;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .slide {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .slide h2 {
+      color: #0077cc;
+    }
+    .slide img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    button {
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: #005fa3;
+    }
+    button:disabled {
+      background-color: #bbb;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="slides">
+      <div class="slide">
+        <h2>What is an AED?</h2>
+        <p>An Automated External Defibrillator (AED) is a portable device that checks the heart rhythm and can send an electric shock to restore a normal rhythm. AEDs are used to treat sudden cardiac arrest (SCA).</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/AED_training_defibrillator.jpg/640px-AED_training_defibrillator.jpg" alt="AED Device">
+      </div>
+      <div class="slide">
+        <h2>When to Use an AED</h2>
+        <p>Use an AED as soon as it is available when a person is unresponsive and not breathing or only gasping. Start CPR immediately and continue until the AED is ready to use.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/AED-use-on-dummy.jpg/640px-AED-use-on-dummy.jpg" alt="Using AED on Dummy">
+      </div>
+      <div class="slide">
+        <h2>How to Use an AED</h2>
+        <ul>
+          <li>1. Turn on the AED and follow voice prompts.</li>
+          <li>2. Expose the person’s chest and attach the pads.</li>
+          <li>3. Allow the AED to analyze the rhythm—do not touch the person.</li>
+          <li>4. If shock is advised, ensure no one is touching the person and press the shock button.</li>
+          <li>5. Resume CPR immediately after the shock, or if no shock is advised.</li>
+        </ul>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/First_aid_-_using_an_AED.jpg/640px-First_aid_-_using_an_AED.jpg" alt="AED Steps">
+      </div>
+      <div class="slide">
+        <h2>Pads Placement and Special Situations</h2>
+        <p>Place one pad on the upper right chest and the other on the lower left side. If the person has a pacemaker or is wet, avoid placing pads over the device or water—dry the chest first.</p>
+        <p>Use pediatric pads if available for children under 8 years or 55 lbs (25 kg). If not available, adult pads can be used.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/AED_Pad_Placement.png/640px-AED_Pad_Placement.png" alt="Pad Placement">
+      </div>
+      <div class="slide">
+        <h2>Next Up: Choking Response</h2>
+        <p>You’ve completed the AED module! Next, you’ll learn how to respond to a choking emergency for adults, children, and infants.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Choking_first_aid.jpg/640px-Choking_first_aid.jpg" alt="Choking Aid">
+      </div>
+    </div>
+    <div class="nav-buttons">
+      <button id="prev" onclick="prevSlide()" disabled>Previous</button>
+      <button id="next" onclick="nextSlide()">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.display = i === index ? 'block' : 'none';
+      });
+      document.getElementById('prev').disabled = index === 0;
+      document.getElementById('next').disabled = index === slides.length - 1;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    showSlide(currentSlide);
+  </script>
+</body>
+</html>
