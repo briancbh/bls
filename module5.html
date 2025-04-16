@@ -98,32 +98,32 @@
   </div>
 
   <script>
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
+  const p     = new URLSearchParams(window.location.search);
+  const name  = p.get('name')  || '';
+  const email = p.get('email') || '';
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.style.display = i === index ? 'block' : 'none';
-      });
-      document.getElementById('prev').disabled = index === 0;
-      document.getElementById('next').disabled = index === slides.length - 1;
-    }
+  const slides = document.querySelectorAll('.slide');
+  let current  = 0;
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
 
-    function nextSlide() {
-      if (currentSlide < slides.length - 1) {
-        currentSlide++;
-        showSlide(currentSlide);
-      }
-    }
+  function show(i){
+    slides.forEach((s,idx)=>s.style.display = idx===i?'block':'none');
+    prevBtn.disabled = i===0;
+    nextBtn.textContent = (i===slides.length-1)?'Continue':'Next';
+  }
 
-    function prevSlide() {
-      if (currentSlide > 0) {
-        currentSlide--;
-        showSlide(currentSlide);
-      }
-    }
+  function next(){
+    if(current < slides.length-1){ current++; show(current); }
+    else location.href =
+  `quiz.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+  }
+  function prev(){ if(current>0){ current--; show(current);} }
 
-    showSlide(currentSlide);
-  </script>
+  prevBtn.onclick = prev;
+  nextBtn.onclick = next;
+  show(current);
+</script>
+
 </body>
 </html>
