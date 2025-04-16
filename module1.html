@@ -64,4 +64,55 @@
       <div class="slide">
         <h2>Let’s Get Started</h2>
         <p>In the next module, we’ll dive into high‑quality CPR … Click below to continue.</p>
-        <img src="https://media.istockphoto.com/id/1368481906/vector/first-aid-and-emergency-response-icon.jpg?s=612x612&w=0&k=20&c=KeQwQXYeED0xyx2AJacYjHj57Cnb-
+        <img src="https://media.istockphoto.com/id/1368481906/vector/first-aid-and-emergency-response-icon.jpg?s=612x612&w=0&k=20&c=KeQwQXYeED0xyx2AJacYjHj57Cnb-5GApAwUjR25Em0=" alt="CPR icon">
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button id="prev" onclick="prevSlide()" disabled>Previous</button>
+      <button id="next" onclick="nextSlide()">Next</button>
+    </div>
+  </div>
+
+  <script>
+    /* ---------- Capture learner identity from the URL ---------- */
+    const params = new URLSearchParams(window.location.search);
+    const name  = params.get('name')  || '';
+    const email = params.get('email') || '';
+
+    /* ---------- Slide navigation ---------- */
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.style.display = i === index ? 'block' : 'none';
+      });
+      document.getElementById('prev').disabled = index === 0;
+      document.getElementById('next').disabled = index === slides.length - 1;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      } else if (currentSlide === slides.length - 1) {
+        /* ---------- Redirect to Module 2, preserving name/email ---------- */
+        const nextUrl =
+          `module2.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+        window.location.href = nextUrl;
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    /* Start with slide 0 visible */
+    showSlide(currentSlide);
+  </script>
+</body>
+</html>
