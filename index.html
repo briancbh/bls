@@ -4,45 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Start BLS Certification</title>
-  <!-- styles trimmed for brevity -->
+  <style>
+    /* ---------- Global layout ---------- */
+    html,body{height:100%;margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#e8f1f9;display:flex;justify-content:center;align-items:center;padding:1rem;box-sizing:border-box}
+    /* ---------- Card ---------- */
+    .card{background:#fff;padding:2.2rem 2rem;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.08);max-width:460px;width:100%;text-align:center;animation:fadeIn .6s ease}
+    @keyframes fadeIn{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
+    /* ---------- Branding ---------- */
+    .branding{display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem}
+    .branding img{width:72px;margin-right:.8rem}
+    .branding span{font-weight:600;color:#0077cc;line-height:1.25}
+    /* ---------- Headings & copy ---------- */
+    h1{font-size:1.5rem;color:#0077cc;margin:.2rem 0 .6rem}
+    p{color:#333;margin:.4rem 0 1rem;font-size:.97rem}
+    /* ---------- Form controls ---------- */
+    input,button{width:100%;padding:.75rem 1rem;margin:.45rem 0;border-radius:6px;font-size:1rem;box-sizing:border-box}
+    input{border:1px solid #ccc;}
+    input:focus{outline:none;border-color:#0077cc;}
+    button{background:#0077cc;color:#fff;border:none;cursor:pointer;transition:background .25s}
+    button:hover{background:#005fa3}
+  </style>
 </head>
 <body>
-  <div class="container">
+  <div class="card">
     <div class="branding">
       <img src="bunny_logo.png" alt="Clipboard Health Logo" onerror="this.style.display='none';">
-      <span>Free BLS Certification Course<br>Sponsored by Clipboard Health</span>
+      <span>Free BLS Certification<br>Sponsored by Clipboard Health</span>
     </div>
-    <h1>Welcome to the BLS Certification Course</h1>
-    <p>Please enter your name and email to begin.</p>
 
-    <input type="text" id="name" placeholder="Your Full Name" required>
+    <h1>Welcome!</h1>
+    <p>Enter your details to begin the course.</p>
+
+    <input type="text"  id="name"  placeholder="Your Full Name" required>
     <input type="email" id="email" placeholder="Your Email Address" required>
-    <button onclick="startCourse()">Start Course</button>
+    <button id="startBtn">Start Course</button>
   </div>
 
 <script>
-  window.onload = () => {
+  /* Autofill if learner refreshes */
+  window.addEventListener('DOMContentLoaded',()=>{
     document.getElementById('name').value  = localStorage.getItem('bls_name')  || '';
     document.getElementById('email').value = localStorage.getItem('bls_email') || '';
-  };
+  });
 
-  function startCourse() {
+  document.getElementById('startBtn').addEventListener('click',()=>{
     const name  = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
-    if (!name || !email) { alert('Please enter both name and email.'); return; }
+    if(!name||!email){alert('Please enter both name and email.');return;}
 
-    localStorage.setItem('bls_name', name);
-    localStorage.setItem('bls_email', email);
+    /* Persist in browser */
+    localStorage.setItem('bls_name',name);
+    localStorage.setItem('bls_email',email);
 
-    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScjA5nOt2Jz10wRrPgCpr27YUYbFTR_4GV-pUQy--dI0lPKlg/formResponse', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-      body: `entry.1273696407=${encodeURIComponent(name)}&entry.552033952=${encodeURIComponent(email)}`
+    /* POST to Google Form (starts sheet) */
+    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScjA5nOt2Jz10wRrPgCpr27YUYbFTR_4GV-pUQy--dI0lPKlg/formResponse',{
+      method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:`entry.1273696407=${encodeURIComponent(name)}&entry.552033952=${encodeURIComponent(email)}`
     });
 
-    location.href = `module1.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-  }
+    /* Go to Module 1 with params */
+    location.href=`module1.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+  });
 </script>
 </body>
 </html>
