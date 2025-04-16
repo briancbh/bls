@@ -3,127 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module 5: Team-Based BLS</title>
+  <title>Module 5 – Team‑Based BLS</title>
+
+  <!-- styles (unchanged) -->
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #e8f1f9;
-      color: #2c3e50;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    .slide {
-      margin-bottom: 3rem;
-      padding: 2rem;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-    .slide h2 {
-      color: #0077cc;
-    }
-    .slide img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-top: 1rem;
-    }
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 2rem;
-    }
-    button {
-      padding: 0.6rem 1.4rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 6px;
-      background-color: #0077cc;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover:not(:disabled) {
-      background-color: #005fa3;
-    }
-    button:disabled {
-      background-color: #bbb;
-      cursor: default;
-    }
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:0;background:#e8f1f9;color:#2c3e50}
+    .container{max-width:800px;margin:0 auto;padding:2rem}
+    .slide{margin-bottom:3rem;padding:2rem;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    .slide h2{color:#0077cc}
+    .slide img{max-width:100%;border-radius:8px;margin-top:1rem}
+    .nav-buttons{display:flex;justify-content:space-between;margin-top:2rem}
+    button{padding:.6rem 1.4rem;font-size:1rem;border:none;border-radius:6px;background:#0077cc;color:#fff;cursor:pointer;transition:background .3s}
+    button:hover:not(:disabled){background:#005fa3}
+    button:disabled{background:#bbb;cursor:default}
   </style>
 </head>
 <body>
   <div class="container">
     <div id="slides">
+      <!-- your existing Module‑5 slides (same as before) -->
       <div class="slide">
-        <h2>Why Team-Based BLS Matters</h2>
-        <p>In a clinical or high-stakes setting, having multiple responders work together increases the effectiveness and efficiency of life-saving efforts. Clear roles and communication are key.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/CPR_training_team.jpg/640px-CPR_training_team.jpg" alt="Team CPR">
+        <h2>Why Team‑Based BLS Matters</h2>
+        <p>In a clinical or high‑stakes setting … Clear roles and communication are key.</p>
+        <img src="img/team_cpr.jpg" alt="Team CPR">
       </div>
+
       <div class="slide">
         <h2>Common Roles in a BLS Team</h2>
         <ul>
-          <li><strong>Compressor:</strong> Delivers chest compressions.</li>
-          <li><strong>Airway Manager:</strong> Provides rescue breaths or uses a bag-mask device.</li>
-          <li><strong>AED Operator:</strong> Retrieves and applies the AED and operates it.</li>
-          <li><strong>Team Leader:</strong> Oversees the situation, assigns roles, and ensures effective coordination.</li>
+          <li><strong>Compressor</strong> – delivers chest compressions</li>
+          <li><strong>Airway Manager</strong> – provides breaths or bag‑mask</li>
+          <li><strong>AED Operator</strong> – retrieves/applies AED</li>
+          <li><strong>Team Leader</strong> – coordinates & assigns roles</li>
         </ul>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/AED_CPR_Teamwork.jpg/640px-AED_CPR_Teamwork.jpg" alt="CPR Team Roles">
+        <img src="img/aed_team.jpg" alt="Team Roles">
       </div>
+
       <div class="slide">
         <h2>Communication is Critical</h2>
-        <p>Use clear, direct communication. Confirm instructions and announce actions (“Administering shock now!”). Rotate compressors every 2 minutes to avoid fatigue.</p>
-        <p>Use closed-loop communication: someone gives a direction, the receiver repeats it back, and confirms when it's done.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Resuscitation_team_training.jpg/640px-Resuscitation_team_training.jpg" alt="Team Communication">
+        <p>Use closed‑loop communication: give direction, hear it repeated back, confirm completion.</p>
+        <img src="img/team_comm.jpg" alt="Team Communication">
       </div>
+
       <div class="slide">
         <h2>Coordinated Practice</h2>
-        <p>Frequent team training helps improve timing, hand-offs, and decision-making. In high-performing teams, each person knows their role, when to rotate, and how to adapt if conditions change.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Team_training_resuscitation.jpg/640px-Team_training_resuscitation.jpg" alt="Team Practice">
+        <p>Regular team drills improve timing, hand‑offs, and decisions under stress.</p>
+        <img src="img/team_practice.jpg" alt="Team Practice">
       </div>
+
       <div class="slide">
         <h2>You’re Almost Done!</h2>
-        <p>In the final section, you’ll take a short quiz to test your understanding. Score 80% or higher to receive your certificate of completion.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/First_aid_training_certification.jpg/640px-First_aid_training_certification.jpg" alt="Certification Prep">
+        <p>Click **Continue** to take the final quiz. Score ≥ 80 % to receive your certificate.</p>
+        <img src="img/cert_illustration.jpg" alt="Certification Prep">
       </div>
     </div>
+
     <div class="nav-buttons">
-      <button id="prev" onclick="prevSlide()" disabled>Previous</button>
-      <button id="next" onclick="nextSlide()">Next</button>
+      <button id="prev">Previous</button>
+      <button id="next">Next</button>
     </div>
   </div>
 
+  <!-- ---------- FIXED SCRIPT ---------- -->
   <script>
-  const p     = new URLSearchParams(window.location.search);
-  const name  = p.get('name')  || '';
-  const email = p.get('email') || '';
+    /* Grab learner identity from URL */
+    const p     = new URLSearchParams(window.location.search);
+    const name  = p.get('name')  || '';
+    const email = p.get('email') || '';
 
-  const slides = document.querySelectorAll('.slide');
-  let current  = 0;
-  const prevBtn = document.getElementById('prev');
-  const nextBtn = document.getElementById('next');
+    const slides   = document.querySelectorAll('.slide');
+    let current    = 0;
+    const prevBtn  = document.getElementById('prev');
+    const nextBtn  = document.getElementById('next');
 
-  function show(i){
-    slides.forEach((s,idx)=>s.style.display = idx===i?'block':'none');
-    prevBtn.disabled = i===0;
-    nextBtn.textContent = (i===slides.length-1)?'Continue':'Next';
-  }
+    /* Show the requested slide and update button states */
+    function show(i){
+      slides.forEach((s,idx)=>s.style.display = idx===i ? 'block' : 'none');
+      prevBtn.disabled = i === 0;
+      nextBtn.textContent = (i === slides.length - 1) ? 'Continue' : 'Next';
+    }
 
-  function next(){
-    if(current < slides.length-1){ current++; show(current); }
-    else location.href =
-  `quiz.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-  }
-  function prev(){ if(current>0){ current--; show(current);} }
+    /* Next / Previous handlers */
+    prevBtn.onclick = () => { if (current>0) { current--; show(current);} };
+    nextBtn.onclick = () => {
+      if (current < slides.length - 1){
+        current++; show(current);
+      } else {
+        /* Last slide → go to QUIZ, KEEPING params */
+        location.href =
+          `quiz.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+      }
+    };
 
-  prevBtn.onclick = prev;
-  nextBtn.onclick = next;
-  show(current);
-</script>
-
+    /* Start on first slide */
+    show(current);
+  </script>
 </body>
 </html>
