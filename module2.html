@@ -60,29 +60,31 @@
   <div class="container">
     <div id="slides">
       <div class="slide">
-        <h2>Adult CPR</h2>
-        <p>For adults, provide compressions at a rate of 100–120 per minute, at least 2 inches deep, allowing full chest recoil. Minimize interruptions and ensure proper hand placement in the center of the chest.</p>
-        <img src="module2_slide1.jpg" alt="Adult CPR">
+        <h2>High-Quality CPR: Overview</h2>
+        <p>High-quality CPR is essential to increase the chance of survival in cardiac arrest. This includes proper chest compression rate and depth, allowing full chest recoil, minimizing interruptions, and avoiding excessive ventilation.</p>
+        <p>To keep the correct rhythm (100-120 compressions per minute), you can perform compressions to the beat of the song <strong>"Stayin' Alive"</strong> by the Bee Gees or "Crazy in Love" by Beyoncé—both have the right tempo.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/CPR_technique_on_training_dummy.jpg/640px-CPR_technique_on_training_dummy.jpg" alt="High-Quality CPR">
       </div>
       <div class="slide">
-        <h2>Child CPR</h2>
-        <p>Use one or two hands for compressions depending on the size of the child. The depth should be about 2 inches (or one-third the depth of the chest). Rate remains 100–120 compressions per minute.</p>
-        <img src="module2_slide2.jpg" alt="Child CPR">
+        <h2>Adult CPR Technique</h2>
+        <p>Place the heel of one hand on the center of the chest, place your other hand on top, and interlock your fingers. Keep your elbows straight and use your upper body weight. Compress the chest at least 2 inches (5 cm) deep at a rate of 100-120 compressions per minute. Allow full chest recoil after each compression.</p>
+        <p>After every 30 compressions, give 2 rescue breaths if trained and able. Minimize interruptions between compressions and breaths.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/CPR_training_on_adult_dummy.jpg/640px-CPR_training_on_adult_dummy.jpg" alt="Adult CPR">
       </div>
       <div class="slide">
-        <h2>Infant CPR</h2>
-        <p>Use two fingers for compressions just below the nipple line. Depth should be 1.5 inches (4 cm). Use the song “Stayin’ Alive” or “Baby Shark” to maintain correct rhythm.</p>
-        <img src="module2_slide3.jpg" alt="Infant CPR">
+        <h2>Child CPR Technique</h2>
+        <p>Use one or two hands depending on the size of the child. Compress the chest about 2 inches (5 cm) deep at the same rate (100-120/min). Deliver 30 compressions followed by 2 breaths if you’re alone, or 15:2 if two rescuers are present.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/CPR_Training_with_child_dummy.jpg/640px-CPR_Training_with_child_dummy.jpg" alt="Child CPR">
       </div>
       <div class="slide">
-        <h2>Using an AED</h2>
-        <p>Turn on the AED immediately and follow the prompts. Expose the chest and attach pads. Clear the victim before analyzing and delivering a shock if advised. Resume CPR immediately after.</p>
-        <img src="module2_slide4.jpg" alt="AED Device">
+        <h2>Infant CPR Technique</h2>
+        <p>Use two fingers in the center of the chest, just below the nipple line. Compress at least 1.5 inches (4 cm) deep at a rate of 100-120 compressions per minute. For 2-rescuer infant CPR, use the two-thumb encircling hands technique and deliver compressions at a 15:2 ratio.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Infant_CPR_training.jpg/640px-Infant_CPR_training.jpg" alt="Infant CPR">
       </div>
       <div class="slide">
-        <h2>Practice Reminder</h2>
-        <p>Practicing CPR on dummies helps reinforce proper technique and rhythm. Repeated, hands-on training builds confidence and muscle memory.</p>
-        <img src="module2_slide5.jpg" alt="Training Session">
+        <h2>Next Up: AED Use</h2>
+        <p>Now that you’ve learned the key steps of high-quality CPR for all age groups, we’ll move on to how to use an AED effectively in emergencies.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Automated_External_Defibrillator_CPR.jpg/640px-Automated_External_Defibrillator_CPR.jpg" alt="AED Use">
       </div>
     </div>
     <div class="nav-buttons">
@@ -92,39 +94,31 @@
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get('name') || '';
-    const email = params.get('email') || '';
+  const p     = new URLSearchParams(window.location.search);
+  const name  = p.get('name')  || '';
+  const email = p.get('email') || '';
 
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  let current  = 0;
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.style.display = i === index ? 'block' : 'none';
-      });
-      document.getElementById('prev').disabled = index === 0;
-      document.getElementById('next').disabled = index === slides.length - 1;
-    }
+  function show(i){
+    slides.forEach((s,idx)=>s.style.display = idx===i?'block':'none');
+    prevBtn.disabled = i===0;
+    nextBtn.textContent = (i===slides.length-1)?'Continue':'Next';
+  }
 
-    function nextSlide() {
-      if (currentSlide < slides.length - 1) {
-        currentSlide++;
-        showSlide(currentSlide);
-      } else {
-        const url = `module3.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-        window.location.href = url;
-      }
-    }
+  function next(){
+    if(current < slides.length-1){ current++; show(current); }
+    else location.href =
+      `module3.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+  }
+  function prev(){ if(current>0){ current--; show(current);} }
 
-    function prevSlide() {
-      if (currentSlide > 0) {
-        currentSlide--;
-        showSlide(currentSlide);
-      }
-    }
-
-    showSlide(currentSlide);
-  </script>
+  prevBtn.onclick = prev;
+  nextBtn.onclick = next;
+  show(current);
+</script>
 </body>
 </html>
