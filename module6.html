@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 6: Legal & Safety Add-Ons</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e8f1f9;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .slide {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .slide h2 {
+      color: #0077cc;
+    }
+    .slide img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    button {
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: #005fa3;
+    }
+    button:disabled {
+      background-color: #bbb;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="slides">
+      <div class="slide">
+        <h2>Good Samaritan Laws</h2>
+        <p>These laws protect individuals who offer reasonable help during emergencies. You are typically protected if:</p>
+        <ul>
+          <li>You act in good faith</li>
+          <li>You provide care voluntarily</li>
+          <li>You avoid gross negligence</li>
+        </ul>
+        <p>💡 <strong>Tip:</strong> Always call for emergency services and explain what you're doing.</p>
+        <img src="placeholder_gsl.jpg" alt="Good Samaritan Law">
+      </div>
+
+      <div class="slide">
+        <h2>Post-CPR: Recovery Position</h2>
+        <p>If the person regains consciousness and is breathing normally, place them on their side in the recovery position to keep their airway clear.</p>
+        <ul>
+          <li>Roll the person onto their side gently</li>
+          <li>Bend their top leg and arm to stabilize the position</li>
+          <li>Continue to monitor their breathing until EMS arrives</li>
+        </ul>
+        <img src="placeholder_recovery.jpg" alt="Recovery Position">
+      </div>
+
+      <div class="slide">
+        <h2>First Aid Basics</h2>
+        <p>In addition to CPR, you may encounter injuries requiring basic first aid. Here are quick actions:</p>
+        <ul>
+          <li><strong>Bleeding:</strong> Apply direct pressure with a clean cloth</li>
+          <li><strong>Burns:</strong> Cool with water, cover with clean dressing</li>
+          <li><strong>Fractures:</strong> Immobilize and wait for EMS</li>
+        </ul>
+        <img src="placeholder_firstaid.jpg" alt="First Aid Basics">
+      </div>
+
+      <div class="slide">
+        <h2>Bloodborne Pathogen Safety</h2>
+        <p>Protect yourself when giving aid by treating all body fluids as potentially infectious:</p>
+        <ul>
+          <li>Use gloves and a mask when available</li>
+          <li>Wash hands with soap and water immediately after providing care</li>
+          <li>Dispose of contaminated materials properly</li>
+        </ul>
+        <img src="placeholder_bbp.jpg" alt="Bloodborne Pathogens">
+      </div>
+
+      <div class="slide">
+        <h2>Skills Check Disclaimer</h2>
+        <p>This course provides the cognitive portion of CPR and AED training, meeting AHA/ECC/OSHA standards.</p>
+        <p><strong>Note:</strong> Some workplaces may require an in-person skills demonstration or evaluation. Be sure to check your facility’s policies.</p>
+        <p>You're now ready to take the final quiz and earn your certificate!</p>
+        <img src="placeholder_disclaimer.jpg" alt="Certification Reminder">
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button id="prev">Previous</button>
+      <button id="next">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const p = new URLSearchParams(window.location.search);
+    const name  = p.get('name')  || '';
+    const email = p.get('email') || '';
+
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+
+    function show(i) {
+      slides.forEach((s, idx) => s.style.display = idx === i ? 'block' : 'none');
+      prevBtn.disabled = i === 0;
+      nextBtn.textContent = i === slides.length - 1 ? 'Take Final Quiz' : 'Next';
+    }
+
+    function next() {
+      if (current < slides.length - 1) {
+        current++;
+        show(current);
+      } else {
+        location.href = `quiz.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+      }
+    }
+
+    function prev() {
+      if (current > 0) {
+        current--;
+        show(current);
+      }
+    }
+
+    prevBtn.onclick = prev;
+    nextBtn.onclick = next;
+    show(current);
+  </script>
+</body>
+</html>
