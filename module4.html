@@ -17,6 +17,19 @@
       margin: 0 auto;
       padding: 2rem;
     }
+    .progress-container {
+      width: 100%;
+      background-color: #cce4f6;
+      height: 8px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #0077cc;
+      transition: width 0.3s ease;
+    }
     .slide {
       margin-bottom: 3rem;
       padding: 2rem;
@@ -58,6 +71,18 @@
 </head>
 <body>
   <div class="container">
+
+    <!-- Progress Label + Bar -->
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+        <strong style="color: #0077cc;">Module 4 Progress</strong>
+        <span id="progressPercent" style="font-size: 0.9rem; color: #555;"></span>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
     <div id="slides">
       <div class="slide">
         <h2>Recognizing Choking</h2>
@@ -87,6 +112,7 @@
         <img src="module4_slide5.jpg" alt="Two Rescuer CPR">
       </div>
     </div>
+
     <div class="nav-buttons">
       <button id="prev" onclick="prevSlide()" disabled>Previous</button>
       <button id="next" onclick="nextSlide()">Next</button>
@@ -94,31 +120,44 @@
   </div>
 
   <script>
-  const p     = new URLSearchParams(window.location.search);
-  const name  = p.get('name')  || '';
-  const email = p.get('email') || '';
+    const p = new URLSearchParams(window.location.search);
+    const name  = p.get('name')  || '';
+    const email = p.get('email') || '';
 
-  const slides = document.querySelectorAll('.slide');
-  let current  = 0;
-  const prevBtn = document.getElementById('prev');
-  const nextBtn = document.getElementById('next');
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
 
-  function show(i){
-    slides.forEach((s,idx)=>s.style.display = idx===i?'block':'none');
-    prevBtn.disabled = i===0;
-    nextBtn.textContent = (i===slides.length-1)?'Continue':'Next';
-  }
+    function show(i) {
+      slides.forEach((s, idx) => s.style.display = idx === i ? 'block' : 'none');
+      prevBtn.disabled = i === 0;
+      nextBtn.textContent = i === slides.length - 1 ? 'Continue' : 'Next';
 
-  function next(){
-    if(current < slides.length-1){ current++; show(current); }
-    else location.href =
-  `module5.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-  }
-  function prev(){ if(current>0){ current--; show(current);} }
+      const progress = ((i + 1) / slides.length) * 100;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+    }
 
-  prevBtn.onclick = prev;
-  nextBtn.onclick = next;
-  show(current);
-</script>
+    function next() {
+      if (current < slides.length - 1) {
+        current++;
+        show(current);
+      } else {
+        location.href = `module5.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+      }
+    }
+
+    function prev() {
+      if (current > 0) {
+        current--;
+        show(current);
+      }
+    }
+
+    prevBtn.onclick = prev;
+    nextBtn.onclick = next;
+    show(current);
+  </script>
 </body>
 </html>
