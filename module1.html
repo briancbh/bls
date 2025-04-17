@@ -5,19 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Module 1 – Introduction to BLS</title>
   <style>
-    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:0;background:#e8f1f9;color:#2c3e50}
-    .container{max-width:800px;margin:0 auto;padding:2rem}
-    .slide{margin-bottom:3rem;padding:2rem;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-    .slide h2{color:#0077cc}
-    .slide img{max-width:100%;border-radius:8px;margin-top:1rem}
-    .nav-buttons{display:flex;justify-content:space-between;margin-top:2rem}
-    button{padding:.6rem 1.4rem;font-size:1rem;border:none;border-radius:6px;background:#0077cc;color:#fff;cursor:pointer;transition:background .3s}
-    button:hover:not(:disabled){background:#005fa3}
-    button:disabled{background:#bbb;cursor:default}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e8f1f9;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .progress-container {
+      width: 100%;
+      background-color: #cce4f6;
+      height: 8px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #0077cc;
+      transition: width 0.3s ease;
+    }
+    .slide {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .slide h2 {
+      color: #0077cc;
+    }
+    .slide img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    button {
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: #005fa3;
+    }
+    button:disabled {
+      background-color: #bbb;
+      cursor: default;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+
+    <!-- Progress bar with label -->
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+        <strong style="color: #0077cc;">Module 1 Progress</strong>
+        <span id="progressPercent" style="font-size: 0.9rem; color: #555;"></span>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
     <div id="slides">
       <div class="slide">
         <h2>Welcome to BLS for Healthcare Providers</h2>
@@ -75,13 +140,17 @@
   function showSlide(i){
     slides.forEach((s,idx)=>{s.style.display = idx===i?'block':'none';});
     prevBtn.disabled = i===0;
+
     if(i === slides.length-1){
       nextBtn.textContent = 'Continue';
-      nextBtn.disabled = false;
     } else {
       nextBtn.textContent = 'Next';
-      nextBtn.disabled = false;
     }
+
+    // Progress bar update
+    const progress = ((i + 1) / slides.length) * 100;
+    document.getElementById('progressBar').style.width = `${progress}%`;
+    document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
   }
 
   function nextSlide(){
@@ -92,7 +161,12 @@
       location.href = url;
     }
   }
-  function prevSlide(){ if(currentSlide>0){ currentSlide--; showSlide(currentSlide);} }
+
+  function prevSlide(){
+    if(currentSlide > 0){
+      currentSlide--; showSlide(currentSlide);
+    }
+  }
 
   showSlide(currentSlide);
 </script>
