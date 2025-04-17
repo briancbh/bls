@@ -58,7 +58,6 @@
       width: 120px;
       margin: 1rem auto;
     }
-
     @media print {
       button {
         display: none;
@@ -95,11 +94,12 @@
     document.getElementById("date").textContent = formattedDate;
     document.getElementById("certId").textContent = certId;
 
-    fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLScKTOcG8qcI2McBo-Difhy2Szqrj6iZG74zyR9ao87jO0p82g/formResponse", {
+    // Send to NEW Google Form
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLSf4c4PXKrGiUG6RMf6Fz8TW5Z7MmEnoFccEbXyMK2gTLMw3og/formResponse", {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `entry.389398208=${encodeURIComponent(name)}&entry.1842104113=${encodeURIComponent(email)}&entry.227075950=${score}&entry.1925319464=${formattedDate}&entry.717739221=${certId}`
+      body: `entry.1273696407=${encodeURIComponent(name)}&entry.552033952=${encodeURIComponent(email)}&entry.227075950=${score}&entry.1925319464=${formattedDate}&entry.717739221=${certId}`
     });
   </script>
 </body>
