@@ -17,7 +17,7 @@
     .certificate {
       background: white;
       padding: 2rem;
-      border: 4px solid #0077cc;
+      border: 4px solid #4CAF50;
       border-radius: 12px;
       width: 90%;
       max-width: 800px;
@@ -25,7 +25,7 @@
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
     }
     h1 {
-      color: #0077cc;
+      color: #4CAF50;
       margin-bottom: 0.5rem;
     }
     h2 {
@@ -43,13 +43,16 @@
     }
     button {
       margin-top: 2rem;
-      background-color: #0077cc;
+      background-color: #4CAF50;
       color: white;
       padding: 0.6rem 1.2rem;
       border: none;
       border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
+    }
+    button:hover {
+      background-color: #388E3C;
     }
     .logo {
       width: 120px;
@@ -78,7 +81,7 @@
     const name = urlParams.get("name") || "[Name not provided]";
     const email = urlParams.get("email") || "";
     const score = parseInt(urlParams.get("score")) || 100;
-    const certId = "CBH-BLS-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+    const certId = "CERT-" + Math.random().toString(36).substring(2, 10).toUpperCase();
     const date = new Date();
     const formattedDate = date.toLocaleDateString();
 
@@ -86,7 +89,6 @@
     document.getElementById("date").textContent = formattedDate;
     document.getElementById("certId").textContent = certId;
 
-    // Send to Google Form
     fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLScKTOcG8qcI2McBo-Difhy2Szqrj6iZG74zyR9ao87jO0p82g/formResponse", {
       method: "POST",
       mode: "no-cors",
