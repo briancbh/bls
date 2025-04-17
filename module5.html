@@ -155,13 +155,13 @@
     }
 
     function next() {
-      if (current < slides.length - 1) {
-        current++;
-        show(current);
-      } else {
-        location.href = `quiz.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-      }
-    }
+  if (current < slides.length - 1) {
+    current++;
+    show(current);
+  } else {
+    location.href = `module6.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+  }
+}
 
     function prev() {
       if (current > 0) {
