@@ -166,13 +166,6 @@
     const name  = localStorage.getItem('bls_name');
     const email = localStorage.getItem('bls_email');
 
-    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScjA5nOt2Jz10wRrPgCpr27YUYbFTR_4GV-pUQy--dI0lPKlg/formResponse', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `entry.1273696407=${encodeURIComponent(name)}&entry.552033952=${encodeURIComponent(email)}`
-    });
-
     location.href = `module1.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
   });
 
