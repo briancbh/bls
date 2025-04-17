@@ -80,3 +80,104 @@
     button:hover {
       background: #388E3C;
     }
+    .hidden {
+      display: none;
+    }
+    .disclaimer {
+      font-size: 0.88rem;
+      color: #555;
+      margin-top: 0.8rem;
+    }
+    ul {
+      text-align: left;
+      padding-left: 1.2rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="branding">
+      <img src="greenfirstaid.jpg" alt="First Aid Symbol" onerror="this.style.display='none';">
+      <span>Free Online BLS/CPR Certification<br>Provided by FreeCPRCertification.org</span>
+    </div>
+
+    <!-- Slide 1: User Info -->
+    <div id="slide1">
+      <h1>Welcome!</h1>
+      <p>Enter your details to begin the course.</p>
+
+      <input type="text"  id="name"  placeholder="Your Full Name" required>
+      <input type="email" id="email" placeholder="Your Email Address" required>
+      <button id="viewOutlineBtn">Start Course</button>
+
+      <p class="disclaimer">
+        This certification complies with the cognitive guidelines of the AHA®/ECC, ILCOR, and OSHA for community and workplace training. A hands-on skills evaluation may be required by certain employers or licensing boards.
+      </p>
+    </div>
+
+    <!-- Slide 2: Course Outline -->
+    <div id="slide2" class="hidden">
+      <h1>Course Outline</h1>
+      <p>This course includes:</p>
+      <ul>
+        <li>✅ Module 1: Introduction to BLS</li>
+        <li>✅ Module 2: High-Quality CPR</li>
+        <li>✅ Module 3: AED Use</li>
+        <li>✅ Module 4: Choking Response</li>
+        <li>✅ Module 5: Team-Based BLS</li>
+        <li>✅ Module 6: Legal & Safety Add-Ons</li>
+        <li>📝 Final Quiz (10 Questions)</li>
+      </ul>
+      <p style="color: #4CAF50; font-weight: 700; font-size: 1.05rem; margin-top: 1.2rem;">
+        <strong>Once you pass the quiz, you'll be able to immediately print your certification for free.</strong>
+      </p>
+      <p><strong>Estimated Completion Time:</strong> ~15-30 minutes</p>
+      <button id="startBtn">Start Module 1</button>
+    </div>
+  </div>
+
+<script>
+  function showSlide(index) {
+    document.getElementById('slide1').classList.toggle('hidden', index !== 1);
+    document.getElementById('slide2').classList.toggle('hidden', index !== 2);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('name').value  = localStorage.getItem('bls_name')  || '';
+    document.getElementById('email').value = localStorage.getItem('bls_email') || '';
+  });
+
+  document.getElementById('viewOutlineBtn').addEventListener('click', () => {
+    const name  = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!name || !email) {
+      alert('Please enter both name and email.');
+      return;
+    }
+
+    localStorage.setItem('bls_name', name);
+    localStorage.setItem('bls_email', email);
+    showSlide(2);
+  });
+
+  document.getElementById('startBtn').addEventListener('click', () => {
+    const name  = localStorage.getItem('bls_name');
+    const email = localStorage.getItem('bls_email');
+
+    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLScjA5nOt2Jz10wRrPgCpr27YUYbFTR_4GV-pUQy--dI0lPKlg/formResponse', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `entry.1273696407=${encodeURIComponent(name)}&entry.552033952=${encodeURIComponent(email)}`
+    });
+
+    location.href = `module1.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+  });
+
+  // Default to slide 1
+  showSlide(1);
+</script>
+</body>
+</html>
