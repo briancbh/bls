@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Module 5 – Team‑Based BLS</title>
+  <title>Module 5 – Team‑Based BLS</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +19,7 @@
     }
     .progress-container {
       width: 100%;
-      background-color: #cce4f6;
+      background-color: #d0e8d0;
       height: 8px;
       border-radius: 8px;
       overflow: hidden;
@@ -27,7 +27,7 @@
     .progress-bar {
       height: 100%;
       width: 0%;
-      background-color: #0077cc;
+      background-color: #4CAF50;
       transition: width 0.3s ease;
     }
     .slide {
@@ -38,7 +38,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     .slide h2 {
-      color: #0077cc;
+      color: #4CAF50;
     }
     .slide img {
       max-width: 100%;
@@ -55,13 +55,13 @@
       font-size: 1rem;
       border: none;
       border-radius: 6px;
-      background-color: #0077cc;
+      background-color: #4CAF50;
       color: white;
       cursor: pointer;
       transition: background 0.3s ease;
     }
     button:hover:not(:disabled) {
-      background-color: #005fa3;
+      background-color: #388E3C;
     }
     button:disabled {
       background-color: #bbb;
@@ -75,7 +75,7 @@
     <!-- Progress Bar with Label -->
     <div style="margin-bottom: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
-        <strong style="color: #0077cc;">Module 5 Progress</strong>
+        <strong style="color: #4CAF50;">Module 5 Progress</strong>
         <span id="progressPercent" style="font-size: 0.9rem; color: #555;"></span>
       </div>
       <div class="progress-container">
@@ -85,7 +85,7 @@
 
     <div id="slides">
       <div class="slide">
-        <h2>Why Team‑Based BLS Matters</h2>
+        <h2>Why Team‑Based BLS Matters</h2>
         <p>In a clinical or high‑stakes setting, clear roles and communication are key to saving lives.</p>
         <img src="module5_slide1.jpg" alt="Team CPR">
       </div>
@@ -122,7 +122,7 @@
       </div>
 
       <div class="slide">
-         <h2>Next Up: Legal, First Aid, and Safety Add-Ons</h2>
+        <h2>Next Up: Legal, First Aid, and Safety Add-Ons</h2>
         <p>In the next module, you’ll learn about Good Samaritan Laws, post-resuscitation care, and additional first aid basics.</p>
       </div>
     </div>
@@ -154,13 +154,13 @@
     }
 
     function next() {
-  if (current < slides.length - 1) {
-    current++;
-    show(current);
-  } else {
-    location.href = `module6.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-  }
-}
+      if (current < slides.length - 1) {
+        current++;
+        show(current);
+      } else {
+        location.href = `module6.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+      }
+    }
 
     function prev() {
       if (current > 0) {
