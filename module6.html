@@ -17,6 +17,19 @@
       margin: 0 auto;
       padding: 2rem;
     }
+    .progress-container {
+      width: 100%;
+      background-color: #cce4f6;
+      height: 8px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #4CAF50;
+      transition: width 0.3s ease;
+    }
     .slide {
       margin-bottom: 3rem;
       padding: 2rem;
@@ -58,6 +71,18 @@
 </head>
 <body>
   <div class="container">
+
+    <!-- ✅ Progress Bar with Label -->
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+        <strong style="color: #4CAF50;">Module 6 Progress</strong>
+        <span id="progressPercent" style="font-size: 0.9rem; color: #555;"></span>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
     <div id="slides">
       <div class="slide">
         <h2>Good Samaritan Laws</h2>
@@ -132,6 +157,10 @@
       slides.forEach((s, idx) => s.style.display = idx === i ? 'block' : 'none');
       prevBtn.disabled = i === 0;
       nextBtn.textContent = i === slides.length - 1 ? 'Take Final Quiz' : 'Next';
+
+      const progress = ((i + 1) / slides.length) * 100;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
     }
 
     function next() {
