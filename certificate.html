@@ -59,8 +59,7 @@
 </head>
 <body>
   <div class="certificate">
-    <img src="bunny_logo.png" alt="Clipboard Health Logo"
-     class="logo" onerror="this.style.display='none';">
+    <img src="bunny_logo.png" alt="Clipboard Health Logo" class="logo" onerror="this.style.display='none';">
     <h1>Certificate of Completion</h1>
     <h2>This certifies that</h2>
     <h2 id="certName" style="font-size: 1.5rem; color: #222; margin-bottom: 1.5rem;"></h2>
@@ -77,11 +76,23 @@
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const name = urlParams.get("name") || "[Name not provided]";
+    const email = urlParams.get("email") || "";
+    const score = parseInt(urlParams.get("score")) || 100;
     const certId = "CBH-BLS-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString();
 
     document.getElementById("certName").textContent = name;
-    document.getElementById("date").textContent = new Date().toLocaleDateString();
+    document.getElementById("date").textContent = formattedDate;
     document.getElementById("certId").textContent = certId;
+
+    // Send to Google Form
+    fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLScKTOcG8qcI2McBo-Difhy2Szqrj6iZG74zyR9ao87jO0p82g/formResponse", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `entry.389398208=${encodeURIComponent(name)}&entry.1842104113=${encodeURIComponent(email)}&entry.227075950=${score}&entry.1925319464=${formattedDate}&entry.717739221=${certId}`
+    });
   </script>
 </body>
 </html>
