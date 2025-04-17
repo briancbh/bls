@@ -4,28 +4,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Module 5 – Team‑Based BLS</title>
-
-  <!-- styles (unchanged) -->
   <style>
-    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;margin:0;padding:0;background:#e8f1f9;color:#2c3e50}
-    .container{max-width:800px;margin:0 auto;padding:2rem}
-    .slide{margin-bottom:3rem;padding:2rem;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-    .slide h2{color:#0077cc}
-    .slide img{max-width:100%;border-radius:8px;margin-top:1rem}
-    .nav-buttons{display:flex;justify-content:space-between;margin-top:2rem}
-    button{padding:.6rem 1.4rem;font-size:1rem;border:none;border-radius:6px;background:#0077cc;color:#fff;cursor:pointer;transition:background .3s}
-    button:hover:not(:disabled){background:#005fa3}
-    button:disabled{background:#bbb;cursor:default}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e8f1f9;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .progress-container {
+      width: 100%;
+      background-color: #cce4f6;
+      height: 8px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #0077cc;
+      transition: width 0.3s ease;
+    }
+    .slide {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .slide h2 {
+      color: #0077cc;
+    }
+    .slide img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    button {
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #0077cc;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover:not(:disabled) {
+      background-color: #005fa3;
+    }
+    button:disabled {
+      background-color: #bbb;
+      cursor: default;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+
+    <!-- Progress Bar with Label -->
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+        <strong style="color: #0077cc;">Module 5 Progress</strong>
+        <span id="progressPercent" style="font-size: 0.9rem; color: #555;"></span>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
     <div id="slides">
-      <!-- your existing Module‑5 slides (same as before) -->
       <div class="slide">
         <h2>Why Team‑Based BLS Matters</h2>
-        <p>In a clinical or high‑stakes setting … Clear roles and communication are key.</p>
-        <img src="module5_slide1.jpg" alt="Team CPR">
+        <p>In a clinical or high‑stakes setting, clear roles and communication are key to saving lives.</p>
+        <img src="module5_slide1.jpg" alt="Team CPR">
       </div>
 
       <div class="slide">
@@ -39,19 +101,19 @@
       </div>
 
       <div class="slide">
-  <h2>Communication is Critical</h2>
-  <p>In a BLS emergency, clear communication prevents confusion and saves time.</p>
-  <p><strong>Example:</strong></p>
-  <ul>
-    <li><strong>Team Leader:</strong> “Jordan, start chest compressions.”</li>
-    <li><strong>Jordan:</strong> “Starting compressions now.” <em>(Jordan begins compressions)</em></li>
-    <li><strong>Team Leader:</strong> “Avery, place the AED pads and prepare to analyze.”</li>
-    <li><strong>Avery:</strong> “Placing pads now.” <em>(Pads are applied)</em></li>
-    <li><strong>Team Leader:</strong> “Is everyone clear? Deliver the shock.”</li>
-    <li><strong>Avery:</strong> “Everyone clear. Delivering shock now.”</li>
-  </ul>
-  <p>This <strong>closed-loop</strong> process confirms the task, repeats it for clarity, and confirms it's done.</p>
-</div>
+        <h2>Communication is Critical</h2>
+        <p>In a BLS emergency, clear communication prevents confusion and saves time.</p>
+        <p><strong>Example:</strong></p>
+        <ul>
+          <li><strong>Team Leader:</strong> “Jordan, start chest compressions.”</li>
+          <li><strong>Jordan:</strong> “Starting compressions now.” <em>(Jordan begins compressions)</em></li>
+          <li><strong>Team Leader:</strong> “Avery, place the AED pads and prepare to analyze.”</li>
+          <li><strong>Avery:</strong> “Placing pads now.” <em>(Pads are applied)</em></li>
+          <li><strong>Team Leader:</strong> “Is everyone clear? Deliver the shock.”</li>
+          <li><strong>Avery:</strong> “Everyone clear. Delivering shock now.”</li>
+        </ul>
+        <p>This <strong>closed-loop</strong> process confirms the task, repeats it for clarity, and confirms it's done.</p>
+      </div>
 
       <div class="slide">
         <h2>Coordinated Practice</h2>
@@ -61,8 +123,8 @@
 
       <div class="slide">
         <h2>You’re Almost Done!</h2>
-        <p>Click **Continue** to take the final quiz. Score ≥ 80 % to receive your certificate.</p>
-        <img src="module5_slide3" alt="Certification Prep">
+        <p>Click <strong>Continue</strong> to take the final quiz. Score ≥ 80 % to receive your certificate.</p>
+        <img src="module5_slide3.jpg" alt="Certification Prep">
       </div>
     </div>
 
@@ -72,38 +134,44 @@
     </div>
   </div>
 
-  <!-- ---------- FIXED SCRIPT ---------- -->
   <script>
-    /* Grab learner identity from URL */
-    const p     = new URLSearchParams(window.location.search);
+    const p = new URLSearchParams(window.location.search);
     const name  = p.get('name')  || '';
     const email = p.get('email') || '';
 
-    const slides   = document.querySelectorAll('.slide');
-    let current    = 0;
-    const prevBtn  = document.getElementById('prev');
-    const nextBtn  = document.getElementById('next');
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
 
-    /* Show the requested slide and update button states */
-    function show(i){
-      slides.forEach((s,idx)=>s.style.display = idx===i ? 'block' : 'none');
+    function show(i) {
+      slides.forEach((s, idx) => s.style.display = idx === i ? 'block' : 'none');
       prevBtn.disabled = i === 0;
-      nextBtn.textContent = (i === slides.length - 1) ? 'Continue' : 'Next';
+      nextBtn.textContent = i === slides.length - 1 ? 'Continue' : 'Next';
+
+      const progress = ((i + 1) / slides.length) * 100;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
     }
 
-    /* Next / Previous handlers */
-    prevBtn.onclick = () => { if (current>0) { current--; show(current);} };
-    nextBtn.onclick = () => {
-      if (current < slides.length - 1){
-        current++; show(current);
+    function next() {
+      if (current < slides.length - 1) {
+        current++;
+        show(current);
       } else {
-        /* Last slide → go to QUIZ, KEEPING params */
-        location.href =
-          `quiz.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+        location.href = `quiz.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
       }
-    };
+    }
 
-    /* Start on first slide */
+    function prev() {
+      if (current > 0) {
+        current--;
+        show(current);
+      }
+    }
+
+    prevBtn.onclick = prev;
+    nextBtn.onclick = next;
     show(current);
   </script>
 </body>
