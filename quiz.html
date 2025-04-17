@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Final Quiz: BLS Certification</title>
   <style>
     body {
@@ -52,109 +52,157 @@
 <body>
   <div class="container">
     <h1>Final Quiz</h1>
-    <form id="quizForm">
-      <div class="question">
-        <h3>1. What is the correct compression rate for high-quality CPR?</h3>
-        <label><input type="radio" name="q1" value="a" /> 60–80 per minute</label>
-        <label><input type="radio" name="q1" value="b" /> 100–120 per minute</label>
-        <label><input type="radio" name="q1" value="c" /> 140–160 per minute</label>
-      </div>
-      <div class="question">
-        <h3>2. When should you use an AED?</h3>
-        <label><input type="radio" name="q2" value="a" /> When the person is unresponsive and not breathing normally</label>
-        <label><input type="radio" name="q2" value="b" /> Only if you’ve performed CPR for 10 minutes</label>
-        <label><input type="radio" name="q2" value="c" /> After checking for a pulse</label>
-      </div>
-      <div class="question">
-        <h3>3. How deep should you compress an adult’s chest?</h3>
-        <label><input type="radio" name="q3" value="a" /> At least 1 inch</label>
-        <label><input type="radio" name="q3" value="b" /> At least 2 inches</label>
-        <label><input type="radio" name="q3" value="c" /> 3 to 4 inches</label>
-      </div>
-      <div class="question">
-        <h3>4. What is the correct response for a conscious adult who is choking?</h3>
-        <label><input type="radio" name="q4" value="a" /> Start CPR immediately</label>
-        <label><input type="radio" name="q4" value="b" /> Give back slaps only</label>
-        <label><input type="radio" name="q4" value="c" /> Perform abdominal thrusts (Heimlich maneuver)</label>
-      </div>
-      <div class="question">
-        <h3>5. How often should rescuers rotate chest compression roles during team BLS?</h3>
-        <label><input type="radio" name="q5" value="a" /> Every 1 minute</label>
-        <label><input type="radio" name="q5" value="b" /> Every 2 minutes</label>
-        <label><input type="radio" name="q5" value="c" /> Every 5 minutes</label>
-      </div>
-      <div class="question">
-        <h3>6. What is the best way to open the airway for rescue breaths in an unresponsive adult?</h3>
-        <label><input type="radio" name="q6" value="a" /> Jaw thrust</label>
-        <label><input type="radio" name="q6" value="b" /> Head tilt-chin lift</label>
-        <label><input type="radio" name="q6" value="c" /> Finger sweep</label>
-      </div>
-      <div class="question">
-        <h3>7. What’s the correct hand position for adult CPR compressions?</h3>
-        <label><input type="radio" name="q7" value="a" /> Two fingers at the nipple line</label>
-        <label><input type="radio" name="q7" value="b" /> Heel of one hand on the lower abdomen</label>
-        <label><input type="radio" name="q7" value="c" /> Heel of one hand on the center of the chest</label>
-      </div>
-      <div class="question">
-        <h3>8. What should you do if an infant becomes unresponsive after choking?</h3>
-        <label><input type="radio" name="q8" value="a" /> Continue back slaps only</label>
-        <label><input type="radio" name="q8" value="b" /> Begin CPR and check mouth before breaths</label>
-        <label><input type="radio" name="q8" value="c" /> Give a glass of water</label>
-      </div>
-      <div class="question">
-        <h3>9. What does closed-loop communication mean in a team-based setting?</h3>
-        <label><input type="radio" name="q9" value="a" /> Team leader does all tasks alone</label>
-        <label><input type="radio" name="q9" value="b" /> Team members repeat and confirm instructions</label>
-        <label><input type="radio" name="q9" value="c" /> Everyone talks at once</label>
-      </div>
-      <div class="question">
-        <h3>10. If no pediatric AED pads are available for a child, what should you do?</h3>
-        <label><input type="radio" name="q10" value="a" /> Skip AED use</label>
-        <label><input type="radio" name="q10" value="b" /> Use adult pads</label>
-        <label><input type="radio" name="q10" value="c" /> Wait for EMS to arrive</label>
-      </div>
-
-      <button type="button" onclick="gradeQuiz()">Submit Answers</button>
-      <div id="result"></div>
-    </form>
+    <form id="quizForm"></form>
+    <div id="result"></div>
+    <button id="submitBtn" onclick="gradeQuiz()">Submit Answers</button>
   </div>
 
   <script>
-  /* — NEW — capture params once */
-  const p     = new URLSearchParams(window.location.search);
-  const name  = p.get('name')  || '';
-  const email = p.get('email') || '';
+    const allQuestions = [
+      {
+        question: "What is the correct depth for adult chest compressions?",
+        options: ["At least 1 inch", "At least 2 inches", "3-4 inches", "Until the chest clicks"],
+        correct: 1
+      },
+      {
+        question: "What protects laypeople when they perform CPR?",
+        options: ["OSHA standards", "Good Samaritan Laws", "Hospital protocol", "First responder status"],
+        correct: 1
+      },
+      {
+        question: "Which rhythm matches the correct rate for CPR compressions?",
+        options: ["50-70 bpm", "70-90 bpm", "100-120 bpm", "130-150 bpm"],
+        correct: 2
+      },
+      {
+        question: "Which action is NOT part of the Chain of Survival?",
+        options: ["Rapid defibrillation", "Early recognition", "Rescue breathing only", "Post-cardiac arrest care"],
+        correct: 2
+      },
+      {
+        question: "What should you do if an infant becomes unresponsive after choking?",
+        options: ["Continue back slaps", "Wait for EMS", "Give water", "Begin CPR and check the airway"],
+        correct: 3
+      },
+      {
+        question: "What position should you place someone in if they’re breathing but unconscious?",
+        options: ["Flat on their back", "Recovery position", "On their stomach", "Upright in a chair"],
+        correct: 1
+      },
+      {
+        question: "What’s the first step when using an AED?",
+        options: ["Apply pads", "Turn it on", "Check pulse", "Deliver shock"],
+        correct: 1
+      },
+      {
+        question: "How should you protect yourself from bloodborne pathogens?",
+        options: ["Hold your breath", "Wear gloves and wash hands", "Use paper towels", "Avoid calling 911"],
+        correct: 1
+      },
+      {
+        question: "Which team member leads and assigns roles during team-based BLS?",
+        options: ["Compressor", "AED Operator", "Airway Manager", "Team Leader"],
+        correct: 3
+      },
+      {
+        question: "What is the compression-to-breath ratio for a single rescuer?",
+        options: ["15:2", "30:2", "20:2", "5:1"],
+        correct: 1
+      },
+      {
+        question: "If a person has a pacemaker, what should you do before using an AED?",
+        options: ["Avoid AED use", "Call a doctor", "Place pads away from the device", "Use pediatric pads"],
+        correct: 2
+      },
+      {
+        question: "Which law protects people who voluntarily give first aid?",
+        options: ["HIPAA", "Good Samaritan Law", "OSHA", "First Aid Act"],
+        correct: 1
+      },
+      {
+        question: "Which scenario requires CPR?",
+        options: ["The person is coughing", "The person is gasping and unresponsive", "The person is awake", "The person is having a nosebleed"],
+        correct: 1
+      },
+      {
+        question: "Which of these helps confirm a team heard and understood instructions?",
+        options: ["Closed-loop communication", "Eye contact", "Speaking loudly", "Written instructions"],
+        correct: 0
+      },
+      {
+        question: "When performing chest compressions, what’s important between compressions?",
+        options: ["Apply pressure constantly", "Rotate every 30 seconds", "Allow full chest recoil", "Compress deeper each time"],
+        correct: 2
+      },
+      {
+        question: "What’s the purpose of the recovery position?",
+        options: ["To wake the person up", "To keep the airway clear", "To give CPR later", "To raise blood pressure"],
+        correct: 1
+      },
+      {
+        question: "When is it acceptable to stop CPR?",
+        options: ["After 1 minute", "If you get tired", "If the person shows signs of life or EMS arrives", "Never stop"],
+        correct: 2
+      },
+      {
+        question: "What ratio of compressions to breaths should be used for two-rescuer infant CPR?",
+        options: ["15:2", "30:2", "20:2", "10:1"],
+        correct: 0
+      },
+      {
+        question: "Which of these is a bloodborne pathogen precaution?",
+        options: ["Drink water", "Apply sunscreen", "Wear gloves", "Use an EpiPen"],
+        correct: 2
+      },
+      {
+        question: "Which type of emergency does an AED treat?",
+        options: ["Broken bone", "Bleeding", "Sudden cardiac arrest", "Heartburn"],
+        correct: 2
+      }
+    ];
 
-  function gradeQuiz() {
-    const answers = { q1:'b', q2:'a', q3:'b', q4:'c', q5:'b',
-                      q6:'b', q7:'c', q8:'b', q9:'b', q10:'b' };
-    let score = 0;
-    for (const key in answers) {
-      const sel = document.querySelector(`input[name="${key}"]:checked`);
-      if (sel && sel.value === answers[key]) score++;
+    const quizForm = document.getElementById("quizForm");
+    const resultDiv = document.getElementById("result");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
     }
-    const percent = (score / 10) * 100;
-    const resultDiv = document.getElementById('result');
 
-    if (percent >= 80) {
-      /* success message now includes ?name=… */
-      resultDiv.innerHTML =
-        `✅ You passed with a score of ${percent}%. Click ` +
-        `<a href="certificate.html?name=${encodeURIComponent(name)}">here</a> ` +
-        `to claim your certificate.`;
-    } else {
-      resultDiv.innerHTML =
-        `❌ You scored ${percent}%. You need at least 80% to pass.<br><br>` +
-        `<button onclick="retryQuiz()">Retry Quiz</button>`;
+    function renderQuiz() {
+      const selected = shuffle([...allQuestions]).slice(0, 10);
+      quizForm.innerHTML = '';
+      selected.forEach((q, idx) => {
+        const block = document.createElement("div");
+        block.className = "question";
+        block.innerHTML = `<h3>${idx + 1}. ${q.question}</h3>` +
+          q.options.map((opt, i) => `
+            <label><input type="radio" name="q${idx}" value="${i}" required> ${opt}</label>
+          `).join('');
+        quizForm.appendChild(block);
+      });
+      quizForm.dataset.answers = JSON.stringify(selected.map(q => q.correct));
     }
-  }
 
-  function retryQuiz() {
-    document.getElementById('quizForm').reset();
-    document.getElementById('result').innerHTML = '';
-    window.scrollTo(0,0);
-  }
-</script>
+    function gradeQuiz() {
+      const answers = JSON.parse(quizForm.dataset.answers);
+      let score = 0;
+      answers.forEach((correct, i) => {
+        const chosen = quizForm.querySelector(`input[name="q${i}"]:checked`);
+        if (chosen && parseInt(chosen.value) === correct) score++;
+      });
+      const percent = (score / answers.length) * 100;
+      if (percent >= 80) {
+        resultDiv.innerHTML = `✅ You passed with a score of ${percent}%. <a href="certificate.html">Click here</a> to claim your certificate.`;
+        submitBtn.style.display = 'none';
+      } else {
+        resultDiv.innerHTML = `❌ You scored ${percent}%. You need at least 80% to pass.`;
+        submitBtn.textContent = 'Retake Quiz';
+        submitBtn.onclick = () => { renderQuiz(); resultDiv.innerHTML = ''; submitBtn.textContent = 'Submit Answers'; submitBtn.onclick = gradeQuiz; };
+      }
+    }
 
+    renderQuiz();
+  </script>
 </body>
 </html>
