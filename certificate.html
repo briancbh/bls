@@ -82,25 +82,30 @@
   </div>
 
   <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const name = urlParams.get("name") || "[Name not provided]";
-  const email = urlParams.get("email") || "";
-  const score = parseInt(urlParams.get("score")) || 100;
-  const certId = "CERT-" + Math.random().toString(36).substring(2, 10).toUpperCase();
-  const date = new Date();
-  const formattedDate = date.toLocaleDateString();
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get("name") || "[Name not provided]";
+    const email = urlParams.get("email") || "";
+    const score = parseInt(urlParams.get("score")) || 100;
+    const certId = "CERT-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString();
 
-  document.getElementById("certName").textContent = name;
-  document.getElementById("date").textContent = formattedDate;
-  document.getElementById("certId").textContent = certId;
+    document.getElementById("certName").textContent = name;
+    document.getElementById("date").textContent = formattedDate;
+    document.getElementById("certId").textContent = certId;
 
-  // ✅ Send to the new Google Form
-  fetch("https://docs.google.com/forms/d/e/1FAIpQLSdG7fPz-6yIC1t4VyWA01ve06MgNOaQ-qXKt7qgE_RvStzH1A/formResponse", {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `entry.443298819=${encodeURIComponent(name)}&entry.1047921717=${encodeURIComponent(email)}&entry.811936379=${encodeURIComponent(formattedDate)}&entry.1690684222=${encodeURIComponent(certId)}`
-  });
-</script>
+    // ✅ Send to the correct Google Form
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLScYtDWz05Xm_NdtfunH7XwTnQRfLmLRCQUpnFWmEcT5FqYAuA/formResponse", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body:
+        `entry.443298819=${encodeURIComponent(name)}` +
+        `&entry.1047921717=${encodeURIComponent(email)}` +
+        `&entry.811936379=${encodeURIComponent(formattedDate)}` +
+        `&entry.960492570=${encodeURIComponent(score)}` +
+        `&entry.1690684222=${encodeURIComponent(certId)}`
+    });
+  </script>
 </body>
 </html>
