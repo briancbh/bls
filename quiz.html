@@ -61,85 +61,91 @@
     <button id="submitBtn" onclick="gradeQuiz()">Submit Answers</button>
   </div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get('name') || '';
-    const email = params.get('email') || '';
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get('name') || '';
+  const email = params.get('email') || '';
+  const quizKey = `quiz_submitted_${email}`;
 
-    const allQuestions = [
-      { question: "What is the correct depth for adult chest compressions?", options: ["At least 1 inch", "At least 2 inches", "3-4 inches", "Until the chest clicks"], correct: 1 },
-      { question: "What protects laypeople when they perform CPR?", options: ["OSHA standards", "Good Samaritan Laws", "Hospital protocol", "First responder status"], correct: 1 },
-      { question: "Which rhythm matches the correct rate for CPR compressions?", options: ["50-70 bpm", "70-90 bpm", "100-120 bpm", "130-150 bpm"], correct: 2 },
-      { question: "Which action is NOT part of the Chain of Survival?", options: ["Rapid defibrillation", "Early recognition", "Rescue breathing only", "Post-cardiac arrest care"], correct: 2 },
-      { question: "What should you do if an infant becomes unresponsive after choking?", options: ["Continue back slaps", "Wait for EMS", "Give water", "Begin CPR and check the airway"], correct: 3 },
-      { question: "What position should you place someone in if they’re breathing but unconscious?", options: ["Flat on their back", "Recovery position", "On their stomach", "Upright in a chair"], correct: 1 },
-      { question: "What’s the first step when using an AED?", options: ["Apply pads", "Turn it on", "Check pulse", "Deliver shock"], correct: 1 },
-      { question: "How should you protect yourself from bloodborne pathogens?", options: ["Hold your breath", "Wear gloves and wash hands", "Use paper towels", "Avoid calling 911"], correct: 1 },
-      { question: "Which team member leads and assigns roles during team-based BLS?", options: ["Compressor", "AED Operator", "Airway Manager", "Team Leader"], correct: 3 },
-      { question: "What is the compression-to-breath ratio for a single rescuer?", options: ["15:2", "30:2", "20:2", "5:1"], correct: 1 },
-      { question: "If a person has a pacemaker, what should you do before using an AED?", options: ["Avoid AED use", "Call a doctor", "Place pads away from the device", "Use pediatric pads"], correct: 2 },
-      { question: "What should you do immediately after delivering a shock with an AED?", options: ["Check for a pulse", "Wait for the AED to give further instructions", "Give rescue breaths", "Resume CPR immediately"], correct: 3 },
-      { question: "Which scenario requires CPR?", options: ["The person is coughing", "The person is gasping and unresponsive", "The person is awake", "The person is having a nosebleed"], correct: 1 },
-      { question: "Which of these helps confirm a team heard and understood instructions?", options: ["Closed-loop communication", "Eye contact", "Speaking loudly", "Written instructions"], correct: 0 },
-      { question: "When performing chest compressions, what’s important between compressions?", options: ["Apply pressure constantly", "Rotate every 30 seconds", "Allow full chest recoil", "Compress deeper each time"], correct: 2 },
-      { question: "What’s the purpose of the recovery position?", options: ["To wake the person up", "To keep the airway clear", "To give CPR later", "To raise blood pressure"], correct: 1 },
-      { question: "When is it acceptable to stop CPR?", options: ["After 1 minute", "If you get tired", "If the person shows signs of life or EMS arrives", "Never stop"], correct: 2 },
-      { question: "What ratio of compressions to breaths should be used for two-rescuer infant CPR?", options: ["15:2", "30:2", "20:2", "10:1"], correct: 0 },
-      { question: "Which of these is a bloodborne pathogen precaution?", options: ["Drink water", "Apply sunscreen", "Wear gloves", "Use an EpiPen"], correct: 2 },
-      { question: "Which type of emergency does an AED treat?", options: ["Broken bone", "Bleeding", "Sudden cardiac arrest", "Heartburn"], correct: 2 }
-    ];
+  const allQuestions = [
+    { question: "What is the correct depth for adult chest compressions?", options: ["At least 1 inch", "At least 2 inches", "3-4 inches", "Until the chest clicks"], correct: 1 },
+    { question: "What protects laypeople when they perform CPR?", options: ["OSHA standards", "Good Samaritan Laws", "Hospital protocol", "First responder status"], correct: 1 },
+    { question: "Which rhythm matches the correct rate for CPR compressions?", options: ["50-70 bpm", "70-90 bpm", "100-120 bpm", "130-150 bpm"], correct: 2 },
+    { question: "Which action is NOT part of the Chain of Survival?", options: ["Rapid defibrillation", "Early recognition", "Rescue breathing only", "Post-cardiac arrest care"], correct: 2 },
+    { question: "What should you do if an infant becomes unresponsive after choking?", options: ["Continue back slaps", "Wait for EMS", "Give water", "Begin CPR and check the airway"], correct: 3 },
+    { question: "What position should you place someone in if they’re breathing but unconscious?", options: ["Flat on their back", "Recovery position", "On their stomach", "Upright in a chair"], correct: 1 },
+    { question: "What’s the first step when using an AED?", options: ["Apply pads", "Turn it on", "Check pulse", "Deliver shock"], correct: 1 },
+    { question: "How should you protect yourself from bloodborne pathogens?", options: ["Hold your breath", "Wear gloves and wash hands", "Use paper towels", "Avoid calling 911"], correct: 1 },
+    { question: "Which team member leads and assigns roles during team-based BLS?", options: ["Compressor", "AED Operator", "Airway Manager", "Team Leader"], correct: 3 },
+    { question: "What is the compression-to-breath ratio for a single rescuer?", options: ["15:2", "30:2", "20:2", "5:1"], correct: 1 },
+    { question: "If a person has a pacemaker, what should you do before using an AED?", options: ["Avoid AED use", "Call a doctor", "Place pads away from the device", "Use pediatric pads"], correct: 2 },
+    { question: "What should you do immediately after delivering a shock with an AED?", options: ["Check for a pulse", "Wait for the AED to give further instructions", "Give rescue breaths", "Resume CPR immediately"], correct: 3 },
+    { question: "Which scenario requires CPR?", options: ["The person is coughing", "The person is gasping and unresponsive", "The person is awake", "The person is having a nosebleed"], correct: 1 },
+    { question: "Which of these helps confirm a team heard and understood instructions?", options: ["Closed-loop communication", "Eye contact", "Speaking loudly", "Written instructions"], correct: 0 },
+    { question: "When performing chest compressions, what’s important between compressions?", options: ["Apply pressure constantly", "Rotate every 30 seconds", "Allow full chest recoil", "Compress deeper each time"], correct: 2 },
+    { question: "What’s the purpose of the recovery position?", options: ["To wake the person up", "To keep the airway clear", "To give CPR later", "To raise blood pressure"], correct: 1 },
+    { question: "When is it acceptable to stop CPR?", options: ["After 1 minute", "If you get tired", "If the person shows signs of life or EMS arrives", "Never stop"], correct: 2 },
+    { question: "What ratio of compressions to breaths should be used for two-rescuer infant CPR?", options: ["15:2", "30:2", "20:2", "10:1"], correct: 0 },
+    { question: "Which of these is a bloodborne pathogen precaution?", options: ["Drink water", "Apply sunscreen", "Wear gloves", "Use an EpiPen"], correct: 2 },
+    { question: "Which type of emergency does an AED treat?", options: ["Broken bone", "Bleeding", "Sudden cardiac arrest", "Heartburn"], correct: 2 }
+  ];
 
-    const quizForm = document.getElementById("quizForm");
-    const resultDiv = document.getElementById("result");
-    const submitBtn = document.getElementById("submitBtn");
+  const quizForm = document.getElementById("quizForm");
+  const resultDiv = document.getElementById("result");
+  const submitBtn = document.getElementById("submitBtn");
 
-    function shuffle(array) {
-      return array.sort(() => Math.random() - 0.5);
-    }
+  function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
 
-    function renderQuiz() {
-      const selected = shuffle([...allQuestions]).slice(0, 10);
-      quizForm.innerHTML = '';
-      selected.forEach((q, idx) => {
-        const block = document.createElement("div");
-        block.className = "question";
-        block.innerHTML = `
-          <h3>${idx + 1}. ${q.question}</h3>
-          ${q.options.map((opt, i) => `
-            <label><input type="radio" name="q${idx}" value="${i}" required> ${opt}</label>
-          `).join('')}
-        `;
-        quizForm.appendChild(block);
-      });
-      quizForm.dataset.answers = JSON.stringify(selected.map(q => q.correct));
-    }
+  function renderQuiz() {
+    const selected = shuffle([...allQuestions]).slice(0, 10);
+    quizForm.innerHTML = '';
+    selected.forEach((q, idx) => {
+      const block = document.createElement("div");
+      block.className = "question";
+      block.innerHTML = `
+        <h3>${idx + 1}. ${q.question}</h3>
+        ${q.options.map((opt, i) => `
+          <label><input type="radio" name="q${idx}" value="${i}" required> ${opt}</label>
+        `).join('')}
+      `;
+      quizForm.appendChild(block);
+    });
+    quizForm.dataset.answers = JSON.stringify(selected.map(q => q.correct));
+  }
 
-    function gradeQuiz() {
-      const answers = JSON.parse(quizForm.dataset.answers);
-      let score = 0;
-      answers.forEach((correct, i) => {
-        const chosen = quizForm.querySelector(`input[name="q${i}"]:checked`);
-        if (chosen && parseInt(chosen.value) === correct) score++;
-      });
-      const percent = Math.round((score / answers.length) * 100);
+  function gradeQuiz() {
+    const answers = JSON.parse(quizForm.dataset.answers);
+    let score = 0;
+    answers.forEach((correct, i) => {
+      const chosen = quizForm.querySelector(`input[name="q${i}"]:checked`);
+      if (chosen && parseInt(chosen.value) === correct) score++;
+    });
+    const percent = Math.round((score / answers.length) * 100);
 
-      if (percent >= 80) {
+    if (percent >= 80) {
+      if (!localStorage.getItem(quizKey)) {
+        localStorage.setItem(quizKey, 'true');
         const certURL = `certificate.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&score=${percent}`;
-        resultDiv.innerHTML = `✅ You passed with a score of ${percent}%. <br><br><a href="${certURL}">Click here to claim your certificate</a>.`;
-        submitBtn.style.display = 'none';
+        resultDiv.innerHTML = `✅ You passed with a score of ${percent}%.<br><br><a href="${certURL}">Click here to claim your certificate</a>.`;
       } else {
-        resultDiv.innerHTML = `❌ You scored ${percent}%. You need at least 80% to pass.`;
-        submitBtn.textContent = 'Retake Quiz';
-        submitBtn.onclick = () => {
-          renderQuiz();
-          resultDiv.innerHTML = '';
-          submitBtn.textContent = 'Submit Answers';
-          submitBtn.onclick = gradeQuiz;
-        };
+        resultDiv.innerHTML = `✅ You've already passed this quiz. <br><br><a href="certificate.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}">View Certificate</a>`;
       }
+      submitBtn.style.display = 'none';
+    } else {
+      resultDiv.innerHTML = `❌ You scored ${percent}%. You need at least 80% to pass.`;
+      submitBtn.textContent = 'Retake Quiz';
+      submitBtn.onclick = () => {
+        renderQuiz();
+        resultDiv.innerHTML = '';
+        submitBtn.textContent = 'Submit Answers';
+        submitBtn.onclick = gradeQuiz;
+      };
     }
+  }
 
-    renderQuiz();
-  </script>
+  renderQuiz();
+</script>
 </body>
 </html>
