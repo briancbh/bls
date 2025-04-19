@@ -86,7 +86,14 @@
     const name = urlParams.get("name") || "[Name not provided]";
     const email = urlParams.get("email") || "";
     const score = parseInt(urlParams.get("score")) || 100;
-    const certId = "CERT-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+
+    const certKey = `certId_${email}`;
+    let certId = localStorage.getItem(certKey);
+    if (!certId) {
+      certId = "CERT-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+      localStorage.setItem(certKey, certId);
+    }
+
     const date = new Date();
     const formattedDate = date.toLocaleDateString();
 
@@ -94,18 +101,22 @@
     document.getElementById("date").textContent = formattedDate;
     document.getElementById("certId").textContent = certId;
 
-    // ✅ Send to the correct Google Form
-    fetch("https://docs.google.com/forms/d/e/1FAIpQLScYtDWz05Xm_NdtfunH7XwTnQRfLmLRCQUpnFWmEcT5FqYAuA/formResponse", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body:
-        `entry.443298819=${encodeURIComponent(name)}` +
-        `&entry.1047921717=${encodeURIComponent(email)}` +
-        `&entry.811936379=${encodeURIComponent(formattedDate)}` +
-        `&entry.960492570=${encodeURIComponent(score)}` +
-        `&entry.1690684222=${encodeURIComponent(certId)}`
-    });
+    // ✅ Submit to Google Form only once per email (prevent duplicates)
+    const formKey = `certSubmitted_${email}`;
+    if (!localStorage.getItem(formKey)) {
+      fetch("https://docs.google.com/forms/d/e/1FAIpQLScYtDWz05Xm_NdtfunH7XwTnQRfLmLRCQUpnFWmEcT5FqYAuA/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body:
+          `entry.443298819=${encodeURIComponent(name)}` +
+          `&entry.1047921717=${encodeURIComponent(email)}` +
+          `&entry.811936379=${encodeURIComponent(formattedDate)}` +
+          `&entry.960492570=${encodeURIComponent(score)}` +
+          `&entry.1690684222=${encodeURIComponent(certId)}`
+      });
+      localStorage.setItem(formKey, "true");
+    }
   </script>
 </body>
 </html>
