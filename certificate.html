@@ -87,36 +87,41 @@
     const email = urlParams.get("email") || "";
     const score = parseInt(urlParams.get("score")) || 100;
 
-    const certKey = `certId_${email}`;
+    const certKey = `bls_cert_${email}`;
+    const dateKey = `bls_cert_date_${email}`;
+
+    // Reuse cert ID if already created
     let certId = localStorage.getItem(certKey);
     if (!certId) {
       certId = "CERT-" + Math.random().toString(36).substring(2, 10).toUpperCase();
       localStorage.setItem(certKey, certId);
     }
 
-    const date = new Date();
-    const formattedDate = date.toLocaleDateString();
+    // Use current date or saved issue date
+    let formattedDate = localStorage.getItem(dateKey);
+    if (!formattedDate) {
+      const now = new Date();
+      formattedDate = now.toLocaleDateString();
+      localStorage.setItem(dateKey, formattedDate);
+    }
 
+    // Display certificate data
     document.getElementById("certName").textContent = name;
     document.getElementById("date").textContent = formattedDate;
     document.getElementById("certId").textContent = certId;
 
-    // ✅ Submit to Google Form only once per email (prevent duplicates)
-    const formKey = `certSubmitted_${email}`;
-    if (!localStorage.getItem(formKey)) {
-      fetch("https://docs.google.com/forms/d/e/1FAIpQLScYtDWz05Xm_NdtfunH7XwTnQRfLmLRCQUpnFWmEcT5FqYAuA/formResponse", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body:
-          `entry.443298819=${encodeURIComponent(name)}` +
-          `&entry.1047921717=${encodeURIComponent(email)}` +
-          `&entry.811936379=${encodeURIComponent(formattedDate)}` +
-          `&entry.960492570=${encodeURIComponent(score)}` +
-          `&entry.1690684222=${encodeURIComponent(certId)}`
-      });
-      localStorage.setItem(formKey, "true");
-    }
+    // Always submit to Google Form so you can track completions
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLScYtDWz05Xm_NdtfunH7XwTnQRfLmLRCQUpnFWmEcT5FqYAuA/formResponse", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body:
+        `entry.443298819=${encodeURIComponent(name)}` +
+        `&entry.1047921717=${encodeURIComponent(email)}` +
+        `&entry.811936379=${encodeURIComponent(formattedDate)}` +
+        `&entry.960492570=${encodeURIComponent(score)}` +
+        `&entry.1690684222=${encodeURIComponent(certId)}`
+    });
   </script>
 </body>
 </html>
